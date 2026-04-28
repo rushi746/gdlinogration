@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { doc, onSnapshot } from 'firebase/firestore';
 import { db } from './firebase';
 import './App.css';
-import videoSource from './assets/video1.mp4';
+import videoSource from './assets/video_new.mp4';
 
 function App() {
   const [state, setState] = useState('idle'); // idle, countdown, play
@@ -120,6 +120,9 @@ function App() {
           src={videoSource}
           style={{ width: '100%', height: '100%', objectFit: 'cover' }}
           playsInline
+          muted
+          preload="auto"
+          loop
         />
 
       </div>
