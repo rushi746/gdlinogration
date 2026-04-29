@@ -74,6 +74,7 @@ function App() {
             // "Warm up" the video element to allow unmuted autoplay later
             if (videoRef.current) {
               videoRef.current.muted = false;
+              setIsMuted(false);
               videoRef.current.play().catch(() => { }).then(() => {
                 videoRef.current.pause();
                 videoRef.current.currentTime = 0;
@@ -92,7 +93,20 @@ function App() {
       )}
 
       {state === 'countdown' && (
-        <div className="hero">
+        <div
+          className="hero"
+          onClick={() => {
+            if (videoRef.current) {
+              videoRef.current.muted = false;
+              setIsMuted(false);
+              videoRef.current.play().catch(() => { }).then(() => {
+                videoRef.current.pause();
+                videoRef.current.currentTime = 0;
+              });
+            }
+          }}
+          style={{ cursor: 'pointer' }}
+        >
           <h1 style={{ fontSize: '15rem', lineHeight: '1' }} className="gradient-text">
             {countdown}
           </h1>
@@ -120,7 +134,7 @@ function App() {
           src={videoSource}
           style={{ width: '100%', height: '100%', objectFit: 'cover' }}
           playsInline
-          muted
+          muted={isMuted}
           preload="auto"
           loop
         />
